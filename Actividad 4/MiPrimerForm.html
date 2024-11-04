@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Contacto</title>
+    <!-- Enlace al archivo CSS correctamente configurado -->
+    <link rel="stylesheet" href="css.css">
+</head>
+<body background="galaxia.jpg">
+
+<!-- Formulario de contacto -->
+<form action="envio.php" method="post">
+    <h1>FORMULARIO DE CONTACTO</h1>
+    <p>Este form se envía a una web de terceros, no introduzcas información personal ni contraseñas.</p>
+    
+    <p>Tu nombre: <input type="text" name="nombre" required></p>
+    
+    <p>Tu dirección de correo: <input type="email" name="correo" required></p>
+    
+    <p>Tu mensaje:<br>
+        <textarea name="mensaje" required></textarea>
+    </p>
+    
+    <p>¿Quieres que te contestemos por email?
+        <select name="envioEmail">
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+        </select>
+    </p>
+    
+    <!-- Grupo de radio buttons para seleccionar el tipo de usuario -->
+    <p>¿Cuál es tu rol?
+        <label><input type="radio" name="tipoUsuario" value="Alumno" required> Alumno</label>
+        <label><input type="radio" name="tipoUsuario" value="Profesor"> Profesor</label>
+        <label><input type="radio" name="tipoUsuario" value="Usuario Externo"> Usuario Externo</label>
+    </p>
+    
+    <input type="submit" value="Enviar mensaje">
+    <button onclick="enviarPorEmail()">Enviar por Email</button>
+</form>
+
+<!-- Botón para enviar por email usando mailto -->
+
+
+<script>
+function enviarPorEmail() {
+    // Recoge los valores del formulario
+    const nombre = document.querySelector('input[name="nombre"]').value;
+    const correo = document.querySelector('input[name="correo"]').value;
+    const mensaje = document.querySelector('textarea[name="mensaje"]').value;
+    const envioEmail = document.querySelector('select[name="envioEmail"]').value;
+    const tipoUsuario = document.querySelector('input[name="tipoUsuario"]:checked').value;
+
+    // Construye el enlace mailto
+    const mailtoLink = `mailto:${correo}?subject=Contacto&body=Nombre: ${nombre}%0AEmail: ${correo}%0AMensaje: ${mensaje}%0AEnvio Email: ${envioEmail}%0ATipo de Usuario: ${tipoUsuario}`;
+
+    // Abre mailto en una nueva ventana
+    window.location.href = mailtoLink;
+}
+</script>
+
+</body>
+</html>
